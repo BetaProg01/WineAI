@@ -12,10 +12,6 @@ class Item(BaseModel):
 
 app = FastAPI()
 
-@app.get("/truth")
-async def root():
-    return {"message": "ICC >> IA >> CYBERSEX"}
-
 @app.post("/api/predict") # prend en entrée les données du vin et renvoie sa prédiction de qualité sur 10
 async def predict_wine():
     return {}
@@ -39,3 +35,7 @@ async def enrich_base():
 @app.post("/api/model/retrain") # réentraîne le modèle (avec les nouvelles données du put), et écrase la sérialisation du dernier
 async def retrain():
     return{}
+
+@app.get("/truth")
+async def root():
+    return {"message": "ICC >> IA >> CYBER"}
