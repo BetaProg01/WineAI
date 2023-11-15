@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.utils import resample
+from sklearn.metrics import confusion_matrix, accuracy_score
 import joblib
 
 # seed for random
@@ -30,8 +31,8 @@ Balanced_data = pd.concat([class_3_upsampled, class_4_upsampled, class_7_upsampl
 
 
 # Prepare train and test datasets
-X = Balanced_df.drop(columns=['quality', 'Id'])
-y = Balanced_df['quality']
+X = Balanced_data.drop(columns=['quality', 'Id'])
+y = Balanced_data['quality']
 
 X = np.array(X)
 y = np.array(y)
@@ -44,9 +45,23 @@ model = RandomForestRegressor(n_estimators=500, random_state=SEED)
 model.fit(X_train, y_train)
 
 
-# Evaluation
+# Evaluations 
 predictions = model.predict(X_test)
+rounded_predictions = np.round(predictions)
 
-# Evaluate the initial model
+rounded_predictions = rounded_predictions.astype(int)
+y_test_classes = y_test.astype(int)
+
+conf_matrix = confusion_matrix(y_test_classes, rounded_predictions)
+print("Confusion Matrix:")
+print(conf_matrix)
+
 mse = mean_squared_error(y_test, predictions)
 print(f'Initial Mean Squared Error: {mse}')
+
+accuracy = accuracy_score(y_test_classes, rounded_predictions)
+print("Accuracy:", accuracy)
+
+
+# Saving model
+joblib.dump(model, 'wine_quality_model.joblib')
