@@ -4,8 +4,8 @@ Projet 2023 de Cloud Microservices à CY Tech Pau entre les classes de dernière
 
 Répos de Fanny Gobbo (IA) et Benoit Verdot (ICC) dans le cadre de ce projet.
 
-
 # REQUIS
 Il est nécessaire d'installer certains packages python : 
 `pandas`
 `scikit-learn`
+=======
