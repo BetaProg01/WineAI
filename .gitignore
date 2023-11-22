@@ -1,1 +1,4 @@
 /.venv/*
+/DiscordBot/.env
+/DiscordBot/node_modules
+/DiscordBot/config.json
